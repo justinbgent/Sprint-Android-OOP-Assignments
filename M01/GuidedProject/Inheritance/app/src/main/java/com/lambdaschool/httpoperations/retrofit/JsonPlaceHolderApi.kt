@@ -2,6 +2,7 @@ package com.lambdaschool.httpoperations.retrofit
 
 
 import com.lambdaschool.httpoperations.model.Employee
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -46,6 +47,10 @@ interface JsonPlaceHolderApi {
                     .retryOnConnectionFailure(false)
                     .readTimeout(10, TimeUnit.SECONDS)
                     .connectTimeout(15, TimeUnit.SECONDS)
+                    .build()
+// Something went wrong/missing here. need to use moshi
+                val moshi = Moshi.Builder()
+                    .add(EmployeeTypeAdapter())
                     .build()
 
                 // TODO 11: Use moshi with type adapter
