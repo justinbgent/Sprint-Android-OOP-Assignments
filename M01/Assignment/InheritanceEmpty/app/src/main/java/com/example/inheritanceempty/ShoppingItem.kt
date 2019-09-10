@@ -2,17 +2,17 @@ package com.example.inheritanceempty
 
 import android.graphics.Color
 
-abstract class ShoppingItem(protected val productName: String, protected val colorId: Int) {
+open class ShoppingItem(protected val productName: String, protected val colorId: Int) {
     val color = colorId
+    val product = productName
 
     open fun getDisplayName(): String {
-        val display = ""
-        return display
+            return ""
     }
 }
 
 class GroceryItem(product: String, private val needsRefrigeration: Boolean) :
-    ShoppingItem(productName = "GroceryItem", colorId = GROCERY_COLOR) {
+    ShoppingItem(productName = product, colorId = GROCERY_COLOR) {
     companion object {
         const val GROCERY_COLOR = Color.GREEN
     }
@@ -28,7 +28,7 @@ class GroceryItem(product: String, private val needsRefrigeration: Boolean) :
 }
 
 class ClothingItem(product: String, private val size: String) :
-    ShoppingItem(productName = "ClothingItem", colorId = CLOTHING_COLOR) {
+    ShoppingItem(productName = product, colorId = CLOTHING_COLOR) {
     companion object {
         const val CLOTHING_COLOR = Color.RED
     }
@@ -43,12 +43,12 @@ class ClothingItem(product: String, private val size: String) :
     }
 }
 
-class Tool(product: String) : ShoppingItem(productName = "Tool", colorId = TOOL_COLOR) {
+class Tool(product: String, private val warrantyYears: Int) : ShoppingItem(productName = product, colorId = TOOL_COLOR) {
     companion object {
         const val TOOL_COLOR = Color.GRAY
     }
 
-    override fun getDisplayName(warrantyYears: String): String {
+    override fun getDisplayName(): String {
         return "$warrantyYears Year Warranty"
     }
 }
