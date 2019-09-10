@@ -14,20 +14,20 @@ class MainActivity : AppCompatActivity() {
 
         val shoppingList: MutableList<ShoppingItem> = mutableListOf()
 
-        for (i in 0..5){
-            val tool = Tool("Wrench", 10)
-            shoppingList.add(tool)
+        fun addItem5Times(item: ShoppingItem){
+            for(i in 0..4){
+                shoppingList.add(item)
+            }
         }
 
-        for (i in 0..5){
-            val groceryItem = GroceryItem("Lettuce", true)
-            shoppingList.add(groceryItem)
-        }
+        val tool = Tool("Wrench", 10)
+        val groceryItem = GroceryItem("Lettuce", true)
+        val clothingItem = ClothingItem("Red T-Shirt", "Large")
 
-        for (i in 0..5){
-            val clothingItem = ClothingItem("Red T-Shirt", "Large")
-            shoppingList.add(clothingItem)
-        }
+        addItem5Times(tool)
+        addItem5Times(groceryItem)
+        addItem5Times((clothingItem))
+
 
         list.setHasFixedSize(true)
         val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
