@@ -2,7 +2,6 @@ package com.example.interfaces
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -32,7 +31,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
 
     companion object{
         var vehicles: ArrayList<Vehicle> = ArrayList()
-        var travelType = ""
+        var travelStyle = ""
         var weight = 0
         var favorite = false
     }
@@ -99,7 +98,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
                     val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
 //                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item)
                         putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
-                        travelType = item.travel()
+                        travelStyle = item.travel()
                         weight = item.weight
                         favorite = item.favorite
 

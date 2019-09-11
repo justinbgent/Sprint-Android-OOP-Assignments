@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.interfaces.ItemListActivity.Companion.favorite
+import com.example.interfaces.ItemListActivity.Companion.travelStyle
 import com.example.interfaces.ItemListActivity.Companion.vehicles
 import com.example.interfaces.ItemListActivity.Companion.weight
 import kotlinx.android.synthetic.main.activity_item_detail.*
@@ -52,6 +53,8 @@ class ItemDetailFragment : Fragment() {
         rootView.btn_more.setOnClickListener {
             objectWeight?.getWeight(weight) ?: Log.i("adsfadsf", "okay")
         }
+
+        rootView.item_detail.text = travelStyle
 
         if (favorite){
             rootView.btn_favorite.text = "Unfavorite"
