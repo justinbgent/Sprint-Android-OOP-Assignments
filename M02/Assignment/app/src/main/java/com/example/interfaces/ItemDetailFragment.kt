@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.interfaces.ItemListActivity.Companion.travelType
+import com.example.interfaces.ItemListActivity.Companion.favorite
+import com.example.interfaces.ItemListActivity.Companion.vehicles
 import com.example.interfaces.ItemListActivity.Companion.weight
-import com.example.interfaces.model.Vehicle
 import kotlinx.android.synthetic.main.activity_item_detail.*
-import kotlinx.android.synthetic.main.activity_item_detail.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
 /**
@@ -25,21 +24,21 @@ class ItemDetailFragment : Fragment() {
     /**
      * The dummy content this fragment is presenting.
      */
-    private var item: Vehicle? = null
+//    private var itemId: Vehicle? = null
+    private var itemId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
-                item = it.getSerializable(ARG_ITEM_ID) as Vehicle?
-                activity?.toolbar_layout?.let {layout ->
-                    layout.toolbar_layout.title = item?.id
-                }
+//                itemId = it.getSerializable(ARG_ITEM_ID) as Vehicle?
+//                activity?.toolbar_layout?.let {layout ->
+//                    layout.toolbar_layout.title = itemId?.id
+//                }
 
-//                val id = it.getString(ARG_ITEM_ID)// as Vehicle?
-//
-//                activity?.toolbar_layout?.title = id ?: "Null"
+                /*val id*/itemId = it.getString(ARG_ITEM_ID)
+                activity?.toolbar_layout?.title = itemId ?: "Null"
             }
         }
     }
@@ -54,9 +53,36 @@ class ItemDetailFragment : Fragment() {
             objectWeight?.getWeight(weight) ?: Log.i("adsfadsf", "okay")
         }
 
-        item = savedInstanceState?.getSerializable("Key") as Vehicle?
-        rootView.item_detail.text = item?.travel()
+        if (favorite){
+            rootView.btn_favorite.text = "Unfavorite"
+        }else{
+            rootView.btn_favorite.text = "Favorite"
+        }
 
+        rootView.btn_favorite.setOnClickListener {
+            if (!favorite){
+                rootView.btn_favorite.text = "Unfavorite"
+                favorite = true
+                vehicles.forEach {
+                    if (it.id == itemId){
+                        it.favorite = favorite
+                    }
+                }
+            }else{
+                rootView.btn_favorite.text = "Favorite"
+                favorite = false
+                vehicles.forEach {
+                    if (it.id == itemId){
+                        it.favorite = favorite
+                    }
+                }
+            }
+
+        }
+
+//        itemId = savedInstanceState?.getSerializable("Key") as Vehicle?
+//        rootView.item_detail.text = itemId?.travel()
+//
         return rootView
     }
 
@@ -80,7 +106,7 @@ class ItemDetailFragment : Fragment() {
 
     companion object {
         /**
-         * The fragment argument representing the item ID that this fragment
+         * The fragment argument representing the itemId ID that this fragment
          * represents.
          */
         const val ARG_ITEM_ID = "item_id"

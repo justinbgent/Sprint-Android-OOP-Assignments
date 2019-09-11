@@ -10,7 +10,13 @@
 
     <Button
         android:id="@+id/btn_more"
-        android:text="Display Weight"
+        android:text="@string/display_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_favorite"
+        android:text="@string/favorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

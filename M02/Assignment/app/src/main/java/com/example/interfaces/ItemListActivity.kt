@@ -34,6 +34,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
         var vehicles: ArrayList<Vehicle> = ArrayList()
         var travelType = ""
         var weight = 0
+        var favorite = false
     }
 
     /**
@@ -46,7 +47,12 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
 
-
+        vehicles.add(Skateboard())
+        vehicles.add(Car())
+        vehicles.add(Airplane())
+        vehicles.add(Unicycle())
+        vehicles.add(Ripstick())
+        vehicles.add(Boat())
 
         setSupportActionBar(toolbar)
         toolbar.title = title
@@ -91,9 +97,11 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
                         .commit()
                 } else {
                     val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item)
+//                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item)
+                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
                         travelType = item.travel()
                         weight = item.weight
+                        favorite = item.favorite
 
                     }
                     v.context.startActivity(intent/*, bundle*/)
