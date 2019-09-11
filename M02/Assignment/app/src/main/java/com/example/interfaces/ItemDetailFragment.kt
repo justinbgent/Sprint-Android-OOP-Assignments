@@ -11,6 +11,7 @@ import com.example.interfaces.ItemListActivity.Companion.favorite
 import com.example.interfaces.ItemListActivity.Companion.travelStyle
 import com.example.interfaces.ItemListActivity.Companion.vehicles
 import com.example.interfaces.ItemListActivity.Companion.weight
+import com.example.interfaces.model.Vehicle
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -25,21 +26,21 @@ class ItemDetailFragment : Fragment() {
     /**
      * The dummy content this fragment is presenting.
      */
-//    private var itemId: Vehicle? = null
-    private var itemId: String? = null
+    private var item: Vehicle? = null
+    //private var itemId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
-//                itemId = it.getSerializable(ARG_ITEM_ID) as Vehicle?
+                item = it.getParcelable(ARG_ITEM_ID) as Vehicle?
 //                activity?.toolbar_layout?.let {layout ->
 //                    layout.toolbar_layout.title = itemId?.id
 //                }
 
-                /*val id*/itemId = it.getString(ARG_ITEM_ID)
-                activity?.toolbar_layout?.title = itemId ?: "Null"
+//                /*val id*/itemId = it.getString(ARG_ITEM_ID)
+                activity?.toolbar_layout?.title = item?.id ?: "Null"
             }
         }
     }
@@ -51,10 +52,10 @@ class ItemDetailFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
         rootView.btn_more.setOnClickListener {
-            objectWeight?.getWeight(weight) ?: Log.i("adsfadsf", "okay")
+            objectWeight?.getWeight(weight)
         }
 
-        rootView.item_detail.text = travelStyle
+        rootView.item_detail.text = item?.travel()
 
         if (favorite){
             rootView.btn_favorite.text = "Unfavorite"
@@ -67,7 +68,7 @@ class ItemDetailFragment : Fragment() {
                 rootView.btn_favorite.text = "Unfavorite"
                 favorite = true
                 vehicles.forEach {
-                    if (it.id == itemId){
+                    if (it.id == item?.id){
                         it.favorite = favorite
                     }
                 }
@@ -75,7 +76,7 @@ class ItemDetailFragment : Fragment() {
                 rootView.btn_favorite.text = "Favorite"
                 favorite = false
                 vehicles.forEach {
-                    if (it.id == itemId){
+                    if (it.id == item?.id){
                         it.favorite = favorite
                     }
                 }

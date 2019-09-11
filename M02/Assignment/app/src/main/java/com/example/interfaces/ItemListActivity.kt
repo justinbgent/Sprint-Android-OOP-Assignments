@@ -23,11 +23,9 @@ import kotlinx.android.synthetic.main.item_list.*
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
+class ItemListActivity : AppCompatActivity(){
 
-    override fun getWeight(weight: Int) {
-        Toast.makeText(this, "Weight: ${weight}lbs", Toast.LENGTH_SHORT).show()
-    }
+
 
     companion object{
         var vehicles: ArrayList<Vehicle> = ArrayList()
@@ -46,6 +44,7 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
 
+        vehicles.clear()
         vehicles.add(Skateboard())
         vehicles.add(Car())
         vehicles.add(Airplane())
@@ -84,27 +83,15 @@ class ItemListActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight {
         init {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as Vehicle
-                if (twoPane) {
-                    val fragment = ItemDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putSerializable(ItemDetailFragment.ARG_ITEM_ID, item)
-                        }
-                    }
-                    parentActivity.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.item_detail_container, fragment)
-                        .commit()
-                } else {
-                    val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-//                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item)
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
-                        travelStyle = item.travel()
-                        weight = item.weight
-                        favorite = item.favorite
+                val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
+                    putExtra(ItemDetailFragment.ARG_ITEM_ID, item)
+//                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+//                        travelStyle = item.travel()
+//                        weight = item.weight
+//                        favorite = item.favorite
 
-                    }
-                    v.context.startActivity(intent/*, bundle*/)
                 }
+                v.context.startActivity(intent/*, bundle*/)
 
             }
         }

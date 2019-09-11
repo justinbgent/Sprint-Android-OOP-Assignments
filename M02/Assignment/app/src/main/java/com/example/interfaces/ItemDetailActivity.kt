@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 /**
@@ -13,7 +14,11 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
  * item details are presented side-by-side with a list of items
  * in a [ItemListActivity].
  */
-class ItemDetailActivity : AppCompatActivity() {
+class ItemDetailActivity : AppCompatActivity(), ItemDetailFragment.ObtainWeight  {
+
+    override fun getWeight(weight: Int) {
+        Toast.makeText(this, "Weight: ${weight}lbs", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,14 +45,7 @@ class ItemDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            val fragment = ItemDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(
-                        ItemDetailFragment.ARG_ITEM_ID,
-                        intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID)
-                    )
-                }
-            }
+            val fragment = ItemDetailFragment()
 
             supportFragmentManager.beginTransaction()
                 .add(R.id.item_detail_container, fragment)

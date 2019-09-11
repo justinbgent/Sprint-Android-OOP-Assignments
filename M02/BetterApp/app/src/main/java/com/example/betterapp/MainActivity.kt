@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val clicker = View.OnClickListener {
             val fragment = DetailsFragment()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.recycler, fragment)
+                .replace(R.id.constraint_layout, fragment)
                 .commit()
         }
 

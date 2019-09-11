@@ -15,13 +15,9 @@ class GenericAPIOperationsActivity : AppCompatActivity() {
         super.onStart()
 
         val observable = Observable.just("Alpha", "Beta", "Gamma", "Delta")
-
         observable.subscribe() {string -> println("Returned: $string")}
 
-
-
         val personObservable = Observable.just(Mark(), Alan())
-
         personObservable.subscribe() {person -> println("Returned: $person")}
 
     }
