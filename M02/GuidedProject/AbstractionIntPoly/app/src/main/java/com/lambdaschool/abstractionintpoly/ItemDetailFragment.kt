@@ -34,6 +34,10 @@ class ItemDetailFragment : Fragment() {
 
                 item = it.getSerializable(ARG_ITEM_ID) as SwApiObject
 
+                activity?.fab?.setOnClickListener {
+
+                }
+
                 val dff = it.getSerializable(ARG_ITEM_ID) as SwApiObject
                 activity?.toolbar_layout?.let { layout ->
                     // TODO 11: S05M02-13 set up the item from the object

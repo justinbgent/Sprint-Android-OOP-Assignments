@@ -1,4 +1,4 @@
-package com.example.interfaces.model
+package com.example.betterapp.model
 
 import java.io.Serializable
 
