@@ -2,59 +2,39 @@ package com.example.interfaces
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.interfaces.ItemListActivity.Companion.favorite
-import com.example.interfaces.ItemListActivity.Companion.travelStyle
 import com.example.interfaces.ItemListActivity.Companion.vehicles
-import com.example.interfaces.ItemListActivity.Companion.weight
 import com.example.interfaces.model.Vehicle
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
-/**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a [ItemListActivity]
- * in two-pane mode (on tablets) or a [ItemDetailActivity]
- * on handsets.
- */
 class ItemDetailFragment : Fragment() {
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private var item: Vehicle? = null
-    //private var itemId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            if (it.containsKey(ARG_ITEM_ID)) {
-                item = it.getParcelable(ARG_ITEM_ID) as Vehicle?
-//                activity?.toolbar_layout?.let {layout ->
-//                    layout.toolbar_layout.title = itemId?.id
-//                }
-
-//                /*val id*/itemId = it.getString(ARG_ITEM_ID)
-                activity?.toolbar_layout?.title = item?.id ?: "Null"
-            }
-        }
+//        TODO: This is just to make my added code easy to find
+        item = arguments?.getParcelable<Parcelable>(ARG_ITEM_ID) as Vehicle?
+        activity?.toolbar_layout?.title = item?.id ?: "Null"
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        TODO: This is just to make my added code easy to find. My code is from here down
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
         rootView.btn_more.setOnClickListener {
-            objectWeight?.getWeight(weight)
-        }
+            if (item != null){
+                objectWeight?.getWeight(item?.weight ?: 0)
+            }
 
+        }
         rootView.item_detail.text = item?.travel()
 
         if (favorite){
@@ -83,10 +63,6 @@ class ItemDetailFragment : Fragment() {
             }
 
         }
-
-//        itemId = savedInstanceState?.getSerializable("Key") as Vehicle?
-//        rootView.item_detail.text = itemId?.travel()
-//
         return rootView
     }
 
@@ -109,10 +85,6 @@ class ItemDetailFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * The fragment argument representing the itemId ID that this fragment
-         * represents.
-         */
         const val ARG_ITEM_ID = "item_id"
     }
 }

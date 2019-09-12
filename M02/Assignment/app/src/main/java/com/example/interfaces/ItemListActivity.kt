@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.example.interfaces.model.*
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
@@ -25,24 +24,19 @@ import kotlinx.android.synthetic.main.item_list.*
  */
 class ItemListActivity : AppCompatActivity(){
 
-
+    private var twoPane: Boolean = false
 
     companion object{
         var vehicles: ArrayList<Vehicle> = ArrayList()
-        var travelStyle = ""
-        var weight = 0
         var favorite = false
     }
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
-    private var twoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
+
+
 
         vehicles.clear()
         vehicles.add(Skateboard())
@@ -82,17 +76,12 @@ class ItemListActivity : AppCompatActivity(){
 
         init {
             onClickListener = View.OnClickListener { v ->
+//        TODO: This is just to make my added code easy to find
                 val item = v.tag as Vehicle
                 val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
                     putExtra(ItemDetailFragment.ARG_ITEM_ID, item)
-//                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
-//                        travelStyle = item.travel()
-//                        weight = item.weight
-//                        favorite = item.favorite
-
                 }
-                v.context.startActivity(intent/*, bundle*/)
-
+                v.context.startActivity(intent)
             }
         }
 

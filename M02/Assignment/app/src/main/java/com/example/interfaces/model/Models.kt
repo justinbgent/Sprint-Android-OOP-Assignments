@@ -1,8 +1,10 @@
 package com.example.interfaces.model
 
 import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-abstract class Vehicle(val id: String, val weight: Int, var favorite: Boolean): Parcelable{
+
+abstract class Vehicle(open val id: String, open val weight: Int, open var favorite: Boolean): Parcelable{
     abstract fun travel(): String
 }
 
@@ -18,7 +20,8 @@ interface GroundTravel{
     fun drive(): String
 }
 
-class Airplane(id: String = "Airplane", weight: Int = 130000, favorite: Boolean = false): Vehicle(id, weight, favorite), AirTravel{
+@Parcelize
+class Airplane(override val id: String = "Airplane", override val weight: Int = 130000, override var favorite: Boolean = false): Vehicle(id, weight, favorite), AirTravel, Parcelable{
     override fun travel(): String {
         return "$id travels via ${fly()}"
     }
@@ -28,7 +31,8 @@ class Airplane(id: String = "Airplane", weight: Int = 130000, favorite: Boolean 
     }
 }
 
-class Car(id: String = "Car", weight: Int = 3500, favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel{
+@Parcelize
+class Car(override val id: String = "Car", override val weight: Int = 3500, override var favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel, Parcelable{
     override fun travel(): String {
         return "$id travels via ${drive()}"
     }
@@ -38,7 +42,8 @@ class Car(id: String = "Car", weight: Int = 3500, favorite: Boolean = false): Ve
     }
 }
 
-class Boat(id: String = "SpeedBoat", weight: Int = 8000, favorite: Boolean = false): Vehicle(id, weight, favorite), WaterTravel{
+@Parcelize
+class Boat(override val id: String = "SpeedBoat", override val weight: Int = 8000, override var favorite: Boolean = false): Vehicle(id, weight, favorite), WaterTravel, Parcelable{
     override fun travel(): String {
         return "$id travels via ${sail()}"
     }
@@ -48,7 +53,8 @@ class Boat(id: String = "SpeedBoat", weight: Int = 8000, favorite: Boolean = fal
     }
 }
 
-class Skateboard(id: String = "Skateboard", weight: Int = 10, favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel{
+@Parcelize
+class Skateboard(override val id: String = "Skateboard", override val weight: Int = 10, override var favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel, Parcelable{
     override fun travel(): String {
         return "$id travels via ${drive()}"
     }
@@ -58,7 +64,8 @@ class Skateboard(id: String = "Skateboard", weight: Int = 10, favorite: Boolean 
     }
 }
 
-class Ripstick(id: String = "Ripstick", weight: Int = 15, favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel{
+@Parcelize
+class Ripstick(override val id: String = "Ripstick", override val weight: Int = 15, override var favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel, Parcelable{
     override fun travel(): String {
         return "$id travels via ${drive()}"
     }
@@ -68,7 +75,8 @@ class Ripstick(id: String = "Ripstick", weight: Int = 15, favorite: Boolean = fa
     }
 }
 
-class Unicycle(id: String = "Unicycle", weight: Int = 25, favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel{
+@Parcelize
+class Unicycle(override val id: String = "Unicycle", override val weight: Int = 25, override var favorite: Boolean = false): Vehicle(id, weight, favorite), GroundTravel, Parcelable{
     override fun travel(): String {
         return "$id travels via ${drive()}"
     }
