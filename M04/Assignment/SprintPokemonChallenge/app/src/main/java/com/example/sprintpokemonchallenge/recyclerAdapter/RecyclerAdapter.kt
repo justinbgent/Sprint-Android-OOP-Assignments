@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sprintpokemonchallenge.R
 import com.example.sprintpokemonchallenge.model.PokemonDetail
-import com.example.sprintpokemonchallenge.ui.MainActivity
-import com.example.sprintpokemonchallenge.ui.MainActivity.Companion.searchedPokemon
-import com.example.sprintpokemonchallenge.ui.PokemonDetailsActivity
+import com.example.sprintpokemonchallenge.view.PokemonDetailsActivity
+import com.example.sprintpokemonchallenge.viewmodel.MainViewModel.Companion.pokemonInfo
+import com.example.sprintpokemonchallenge.viewmodel.MainViewModel.Companion.searchedPokemon
 import kotlinx.android.synthetic.main.recycler_item.view.*
 
 class RecyclerAdapter(private val pokemonIndex: List<PokemonDetail>?) :
@@ -34,7 +34,7 @@ class RecyclerAdapter(private val pokemonIndex: List<PokemonDetail>?) :
             holder.name.text = pokemon.name
 
             holder.name.setOnClickListener {
-                MainActivity.pokemonInfo = pokemon
+                pokemonInfo = pokemon
                 val intent = Intent(context, PokemonDetailsActivity::class.java)
                 context.startActivity(intent)
             }

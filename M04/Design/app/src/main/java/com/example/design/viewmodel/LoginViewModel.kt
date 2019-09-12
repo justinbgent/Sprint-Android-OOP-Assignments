@@ -7,7 +7,7 @@ import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
 import com.example.design.model.User
 
-class LoginViewModel: BaseObservable() {
+class LoginViewModel : BaseObservable() {
 
     private val successMessage = "Login Succeeded"
     private val failureMessage = "Login Failed"
@@ -20,10 +20,10 @@ class LoginViewModel: BaseObservable() {
 //    }
     @Bindable
     var toastMessage: String? = null
-    set(value){
-        field = value
-        notifyPropertyChanged(BR.toastMessage)
-    }
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.toastMessage)
+        }
 
     @Bindable
     fun getUserEmail(): String? {
@@ -44,11 +44,11 @@ class LoginViewModel: BaseObservable() {
         user.password = password
     }
 
+    //    @Bindable
     fun onLoginClicked() {
-        toastMessage = if (isValid()){
+        toastMessage = if (isValid()) {
             successMessage
-        }
-        else{
+        } else {
             failureMessage
         }
     }

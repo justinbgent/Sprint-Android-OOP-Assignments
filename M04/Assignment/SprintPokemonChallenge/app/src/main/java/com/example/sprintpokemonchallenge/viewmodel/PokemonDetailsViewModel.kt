@@ -1,20 +1,19 @@
-package com.example.sprintpokemonchallenge.ui
+package com.example.sprintpokemonchallenge.viewmodel
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.sprintpokemonchallenge.R
-import com.example.sprintpokemonchallenge.model.PokemonDetail
-import com.example.sprintpokemonchallenge.ui.MainActivity.Companion.pokemonInfo
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.databinding.BaseObservable
+import com.example.sprintpokemonchallenge.viewmodel.MainViewModel.Companion.pokemonInfo
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_pokemon_details.*
-import kotlinx.android.synthetic.main.recycler_item.*
 
-class PokemonDetailsActivity : AppCompatActivity() {
+class PokemonDetailsViewModel: BaseObservable() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pokemon_details)
-
+    fun getUI(image_sprite: ImageView,
+              txt_pokemon_name: TextView,
+              txt_id: TextView,
+              txt_abilities: TextView,
+              txt_types: TextView
+    ){
 
         Picasso.get().load(pokemonInfo.sprites.pokemonSprite).into(image_sprite)
         txt_pokemon_name.text = pokemonInfo.name
@@ -35,6 +34,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
             types += "-${pokemonInfo.types[i].type.name} "
         }
         txt_types.text = types
-
     }
+
 }
